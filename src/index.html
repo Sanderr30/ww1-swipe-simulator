@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Империя в огне: Великая война</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="screen-start" class="screen active">
+    <div class="start-content">
+      <div class="start-year">1914</div>
+      <h1>Империя в огне</h1>
+      <p class="start-subtitle">Великая война</p>
+      <p class="start-desc">Вы советник императора. Каждое решение приближает победу или революцию. Удержите армию, экономику и общество — или потеряете империю.</p>
+      <button id="btn-start">Начать игру</button>
+    </div>
+  </div>
+
+  <div id="screen-game" class="screen">
+
+    <div id="stats">
+      <div class="stat" id="stat-army">
+        <span class="stat-icon">⚔️</span>
+        <div class="stat-bar-wrap">
+          <div class="stat-bar" id="bar-army"></div>
+        </div>
+        <span class="stat-label">Армия</span>
+      </div>
+      <div class="stat" id="stat-economy">
+        <span class="stat-icon">🏭</span>
+        <div class="stat-bar-wrap">
+          <div class="stat-bar" id="bar-economy"></div>
+        </div>
+        <span class="stat-label">Экономика</span>
+      </div>
+      <div class="stat" id="stat-society">
+        <span class="stat-icon">👥</span>
+        <div class="stat-bar-wrap">
+          <div class="stat-bar" id="bar-society"></div>
+        </div>
+        <span class="stat-label">Общество</span>
+      </div>
+    </div>
+
+    <div id="timeline">
+      <span class="timeline-label">1914</span>
+      <div id="timeline-track"><div id="timeline-fill"></div></div>
+      <span class="timeline-label">1917</span>
+    </div>
+
+    <div id="year-display"></div>
+
+    <div id="consequence-flash"></div>
+
+    <div id="card-zone">
+      <div id="card-hint-left" class="card-hint">
+        <div class="hint-label" id="hint-left-label"></div>
+        <div class="hint-effects" id="hint-left-effects"></div>
+      </div>
+      <div id="card-hint-right" class="card-hint">
+        <div class="hint-label" id="hint-right-label"></div>
+        <div class="hint-effects" id="hint-right-effects"></div>
+      </div>
+
+      <div id="card">
+        <div id="card-title"></div>
+        <div id="card-text"></div>
+      </div>
+    </div>
+
+    <div id="floats-container"></div>
+
+    <div id="swipe-hints">
+      <div class="swipe-hint-btn" id="btn-left">
+        <span class="arrow">◀</span>
+        <span class="btn-label" id="btn-left-label">Влево</span>
+      </div>
+      <div class="swipe-hint-btn" id="btn-right">
+        <span class="btn-label" id="btn-right-label">Вправо</span>
+        <span class="arrow">▶</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="screen-result" class="screen">
+    <div class="result-content">
+      <div id="result-icon"></div>
+      <h2 id="result-title"></h2>
+      <p id="result-text"></p>
+      <div id="result-stats"></div>
+      <button id="btn-restart">Сыграть снова</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
