@@ -187,7 +187,11 @@ function applyChoice(direction) {
   if (state.society  <= 0) { animateFly(direction, () => setTimeout(() => endGame('society'),  delay)); return; }
 
   state.cardIndex++;
-  animateFly(direction, showCard);
+  animateFly(direction, () => {
+    setTimeout(() => {
+      showCard();
+    }, 2000);
+  });
 }
 
 function animateFly(direction, callback) {
