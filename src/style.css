@@ -246,6 +246,32 @@ button:hover {
 .hint-effect-row.neg { color: #e07070; }
 .hint-effect-row.neu { color: var(--text-dim); }
 
+.is-hidden {
+  display: none !important;
+}
+
+.card-figure {
+  margin: 0;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid #3a3020;
+  background: #15120e;
+}
+
+.card-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.card-fact {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
 #card {
   width: 100%;
   max-width: 340px;

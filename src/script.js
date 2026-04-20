@@ -20,6 +20,9 @@ const barSociety     = document.getElementById('bar-society');
 const yearDisplay    = document.getElementById('year-display');
 const timelineFill   = document.getElementById('timeline-fill');
 const cardEl         = document.getElementById('card');
+const cardFigure     = document.getElementById('card-figure');
+const cardImage      = document.getElementById('card-image');
+const cardFact       = document.getElementById('card-fact');
 const cardTitle      = document.getElementById('card-title');
 const cardText       = document.getElementById('card-text');
 const hintLeft       = document.getElementById('card-hint-left');
@@ -141,6 +144,31 @@ function showCard() {
   cardTitle.textContent = card.title;
   cardText.textContent  = card.text;
   yearDisplay.textContent = card.year + ' год';
+
+  if (card.image) {
+    cardImage.alt = card.title;
+    cardImage.onerror = () => {
+      cardFigure.classList.add('is-hidden');
+      cardImage.removeAttribute('src');
+    };
+    cardImage.onload = () => cardFigure.classList.remove('is-hidden');
+    cardImage.src = card.image;
+    if (cardImage.complete && cardImage.naturalWidth > 0) {
+      cardFigure.classList.remove('is-hidden');
+    }
+  } else {
+    cardFigure.classList.add('is-hidden');
+    cardImage.removeAttribute('src');
+    cardImage.alt = '';
+  }
+
+  if (card.fact) {
+    cardFact.textContent = card.fact;
+    cardFact.classList.remove('is-hidden');
+  } else {
+    cardFact.textContent = '';
+    cardFact.classList.add('is-hidden');
+  }
 
   hintLeftLabel.textContent  = card.left.label;
   hintRightLabel.textContent = card.right.label;
