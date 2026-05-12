@@ -180,23 +180,61 @@ button:hover {
   text-transform: uppercase;
 }
 
-#consequence-flash {
+.consequence-modal {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(14, 11, 8, 0.92);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  animation: fade-in 0.25s ease;
+}
+
+.consequence-modal.is-hidden {
+  display: none;
+}
+
+.consequence-body {
+  background: #1e1a14;
   border: 1px solid var(--accent);
-  color: var(--text);
-  font-size: 0.85rem;
-  line-height: 1.5;
-  padding: 0.8rem 1.2rem;
-  max-width: 320px;
+  border-radius: 4px;
+  padding: 1.5rem 2rem;
+  max-width: 340px;
   text-align: center;
-  pointer-events: none;
-  opacity: 0;
-  z-index: 100;
-  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+#consequence-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text);
+  font-style: italic;
+}
+
+#btn-consequence-next {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 0.5rem 1.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  font-family: 'Georgia', serif;
+  transition: background 0.2s, color 0.2s;
+  align-self: center;
+}
+
+#btn-consequence-next:hover {
+  background: var(--accent);
+  color: #0d0b08;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 #card-zone {

@@ -31,10 +31,12 @@ const hintLeftLabel  = document.getElementById('hint-left-label');
 const hintRightLabel = document.getElementById('hint-right-label');
 const hintLeftFx     = document.getElementById('hint-left-effects');
 const hintRightFx    = document.getElementById('hint-right-effects');
-const floatsContainer = document.getElementById('floats-container');
-const consequenceFlash = document.getElementById('consequence-flash');
-const btnLeftLabel   = document.getElementById('btn-left-label');
-const btnRightLabel  = document.getElementById('btn-right-label');
+const floatsContainer    = document.getElementById('floats-container');
+const consequenceModal   = document.getElementById('consequence-modal');
+const consequenceText    = document.getElementById('consequence-text');
+const btnConsequenceNext = document.getElementById('btn-consequence-next');
+const btnLeftLabel       = document.getElementById('btn-left-label');
+const btnRightLabel      = document.getElementById('btn-right-label');
 
 
 function showScreen(name) {
@@ -115,15 +117,6 @@ function shakeScreen() {
 }
 
 
-function showConsequence(text) {
-  consequenceFlash.textContent = text;
-  consequenceFlash.classList.remove('consequence-show');
-  void consequenceFlash.offsetWidth;
-  consequenceFlash.classList.add('consequence-show');
-  consequenceFlash.addEventListener('animationend', () => {
-    consequenceFlash.classList.remove('consequence-show');
-  }, { once: true });
-}
 
 
 function buildEffectsHtml(effects) {
@@ -204,22 +197,33 @@ function applyChoice(direction) {
     shakeScreen();
   }
 
-  if (choice.consequence) {
-    setTimeout(() => showConsequence(choice.consequence), 200);
+  // Определяем что делать после закрытия модала (или сразу, если нет последствия)
+  let gameOverReason = null;
+  if (state.army    <= 0) gameOverReason = 'army';
+  if (state.economy <= 0) gameOverReason = 'economy';
+  if (state.society <= 0) gameOverReason = 'society';
+
+  if (!gameOverReason) state.cardIndex++;
+
+  function proceed() {
+    if (gameOverReason) {
+      animateFly(direction, () => setTimeout(() => endGame(gameOverReason), 300));
+    } else {
+      animateFly(direction, showCard);
+    }
   }
 
-  const delay = choice.consequence ? 800 : 0;
-
-  if (state.army     <= 0) { animateFly(direction, () => setTimeout(() => endGame('army'),     delay)); return; }
-  if (state.economy  <= 0) { animateFly(direction, () => setTimeout(() => endGame('economy'),  delay)); return; }
-  if (state.society  <= 0) { animateFly(direction, () => setTimeout(() => endGame('society'),  delay)); return; }
-
-  state.cardIndex++;
-  animateFly(direction, () => {
-    setTimeout(() => {
-      showCard();
-    }, 2000);
-  });
+  if (choice.consequence) {
+    // Показываем модал, ждём нажатия кнопки
+    consequenceText.textContent = choice.consequence;
+    consequenceModal.classList.remove('is-hidden');
+    btnConsequenceNext.onclick = () => {
+      consequenceModal.classList.add('is-hidden');
+      proceed();
+    };
+  } else {
+    proceed();
+  }
 }
 
 function animateFly(direction, callback) {
