@@ -197,7 +197,6 @@ function applyChoice(direction) {
     shakeScreen();
   }
 
-  // Определяем что делать после закрытия модала (или сразу, если нет последствия)
   let gameOverReason = null;
   if (state.army    <= 0) gameOverReason = 'army';
   if (state.economy <= 0) gameOverReason = 'economy';
@@ -214,7 +213,6 @@ function applyChoice(direction) {
   }
 
   if (choice.consequence) {
-    // Показываем модал, ждём нажатия кнопки
     consequenceText.textContent = choice.consequence;
     consequenceModal.classList.remove('is-hidden');
     btnConsequenceNext.onclick = () => {
